@@ -48,6 +48,11 @@ ul {
   list-style: none;
 }
 #topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,6 +60,7 @@ ul {
   color: #fff;
   padding: 10px;
 }
+
 
 .quality-button {
   border: none;
@@ -64,7 +70,7 @@ ul {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: -200px;
 }
 
 #search-box {
@@ -72,7 +78,7 @@ ul {
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  width: 50%;
+
   margin: 0 auto;
 }
 .movie-info {

@@ -1,56 +1,33 @@
-import '@/styles/globals.css'
+import "@/styles/globals.css";
 import React, { useState, useEffect } from "react";
 import fetch from "isomorphic-unfetch";
 
+type Movie = {
+  id: number;
+  title: string;
+  year: number;
+  rating: number;
+  description_full: string;
+  medium_cover_image: string;
+  torrents: {
+    url: string;
+    hash: string;
+    quality: string;
+    type: string;
+    seeds: number;
+    peers: number;
+    size: string;
+    size_bytes: number;
+    date_uploaded: string;
+    date_uploaded_unix: number;
+  }[];
+};
+
 const Home = () => {
-  type Movie = {
-    id: number;
-    title: string;
-    year: number;
-    rating: number;
-    description_full: string;
-    medium_cover_image: string;
-    torrents: {
-      url: string;
-      hash: string;
-      quality: string;
-      type: string;
-      seeds: number;
-      peers: number;
-      size: string;
-      size_bytes: number;
-      date_uploaded: string;
-      date_uploaded_unix: number;
-    }[];
-  };
-
-
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
-
-  const handleLoginClick = () => {
-    setShowLoginModal(true);
-  };
-
-  const handleRegisterClick = () => {
-    setShowRegisterModal(true);
-  };
-
-  const closeModal = () => {
-    setShowLoginModal(false);
-    setShowRegisterModal(false);
-  };
-
-  const [showModal, setShowModal] = useState(false);
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState<Movie[]>([]);
   const [quality, setQuality] = useState("720p");
-
-
-  const handleModalToggle = () => {
-    setShowModal(!showModal);
-  };
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -114,6 +91,8 @@ const Home = () => {
           >
             Search
           </button>
+        </div>
+        <div className="quality-box">
           <button
             title="Apretar para cambiar la calidad del torrent a 1080p o 2160p o 720p"
             className="quality-button"
@@ -129,9 +108,7 @@ const Home = () => {
           >
             {quality}
           </button>
-          
         </div>
-        
       </div>
       <ul className="movie-list">
         {movies.map((movie: Movie) => (

@@ -4,6 +4,8 @@ import fetch from "isomorphic-unfetch";
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import Image from 'next/image';
+
 
 type Movie = {
   id: number;
@@ -88,8 +90,8 @@ const Home = () => {
   return (
     <div className="container">
       <div id="topbar">
-        <div className="logo">
-          <img src="https://i.imgur.com/ptYntKr.png" alt="Logo" />
+        <div className="logo">  
+          <Image src="https://i.imgur.com/ptYntKr.png" alt="Logo" width={140} height={40}/>
         </div>
         <div className="search-box">
           <input
@@ -130,7 +132,7 @@ const Home = () => {
       <ul className="movie-list">
         {displayedMovies.map((movie: Movie) => (
           <li key={movie.id} className="movie-item">
-            <img src={movie.medium_cover_image} alt={movie.title} />
+            <Image src={movie.medium_cover_image} alt={movie.title} width={230} height={345} />
             <div className="movie-info">
               <h2>{movie.title}</h2>
               <p>Rating: {movie.rating}</p>

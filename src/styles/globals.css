@@ -1,27 +1,148 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  margin: 0;
+  padding: 0px;
+}
+
+.container {
+  
+  background-color: #00DBDE;
+  background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+input[type='text'] {
+  flex: 1;
+  margin-right: 10px;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  background-color: #111111;
+  color: white;
+  cursor: pointer;
+}
+.logo {
+  width: 140px;
+}
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+* {
+  border: none;
+  outline: none;
+}
+ul {
+  list-style: none;
+}
+#topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+.quality-button {
+  border: none;
+  border-radius: 5px;
+  padding: 11px;
+  margin-right: 80px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#search-box {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 50%;
+  margin: 0 auto;
+}
+.movie-info {
+  font-family: Arial, sans-serif;
+  text-align: justify;
+  max-width: 800px; /* Change this value to your desired max width */
+  margin-left:auto; /* Add this line */
+  margin-right:auto; /* Add this line */
+  text-align: center;
+}
+.movie-list {
+    margin-top: 20px;
+}
+#login-button {
+  margin-right: 20px;
+  padding: 10px;
+  background-color: black;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#login-button:hover {
+  background-color: #0060df;
+}
+#register-button {
+  margin-right: 20px;
+  padding: 10px;
+  background-color:black;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#register-button:hover {
+  background-color: #0060df;
+}
+
+button:hover {
+  background-color: #0060df;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.movie {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
 }

@@ -1,6 +1,9 @@
 import "@/styles/globals.css";
 import React, { useState, useEffect } from "react";
 import fetch from "isomorphic-unfetch";
+import ReactPaginate from "react-paginate";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 type Movie = {
   id: number;
@@ -24,10 +27,14 @@ type Movie = {
 };
 
 const Home = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const moviesPerPage = 4;
+
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState<Movie[]>([]);
   const [quality, setQuality] = useState("720p");
+  const [sortBy, setSortBy] = useState("download_count");
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -40,7 +47,7 @@ const Home = () => {
     };
 
     fetchMovies();
-  }, []);
+  }, [sortBy]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -49,7 +56,7 @@ const Home = () => {
       }
 
       const res = await fetch(
-        `https://yts.mx/api/v2/list_movies.json?query_term=${searchTerm}`
+        `https://yts.mx/api/v2/list_movies.json?query_term=${searchTerm}&sort_by=${sortBy}`
       );
       const data = await res.json();
 
@@ -63,11 +70,20 @@ const Home = () => {
     };
 
     fetchMovies();
-  }, [searchTerm, isSearchClicked]);
+  }, [searchTerm, isSearchClicked, sortBy]);
 
   const handleSearch = () => {
     setIsSearchClicked(true);
   };
+  
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  const displayedMovies = movies.slice(
+    currentPage * moviesPerPage,
+    (currentPage + 1) * moviesPerPage
+  );
   return (
     <div className="container">
       <div id="topbar">
@@ -111,7 +127,7 @@ const Home = () => {
         </div>
       </div>
       <ul className="movie-list">
-        {movies.map((movie: Movie) => (
+        {displayedMovies.map((movie: Movie) => (
           <li key={movie.id} className="movie-item">
             <img src={movie.medium_cover_image} alt={movie.title} />
             <div className="movie-info">
@@ -137,6 +153,18 @@ const Home = () => {
           </li>
         ))}
       </ul>
+      <ReactPaginate
+        previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
+        nextLabel={<FontAwesomeIcon icon={faChevronRight} />}
+        breakLabel={"..."}
+        pageCount={Math.ceil(movies.length / moviesPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination my-custom-class"}
+        activeClassName={"active"}
+      />
+
     </div>
   );
 };

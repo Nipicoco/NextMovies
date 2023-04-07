@@ -76,9 +76,10 @@ const Home = () => {
     setIsSearchClicked(true);
   };
   
-  const handlePageClick = ({ selected }) => {
+  const handlePageClick = ({ selected }: { selected: number }) => {
     setCurrentPage(selected);
   };
+  
 
   const displayedMovies = movies.slice(
     currentPage * moviesPerPage,

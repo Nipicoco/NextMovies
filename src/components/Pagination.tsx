@@ -1,11 +1,16 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
+
+//import styles 
+import styles from "@/styles/Home.module.css";
 interface Props {
   pageCount: number;
   currentPage: number;
@@ -26,11 +31,11 @@ const Pagination: React.FC<Props> = ({
   marginPagesDisplayed={2}
   pageRangeDisplayed={5}
   onPageChange={onPageChange}
-  containerClassName={'pagination'}
-  previousClassName={'pagination-button'}
-  nextClassName={'pagination-button'}
-  activeClassName={'active'}
-  pageClassName={'pagination-button'}
+  containerClassName={styles.pagination}
+  previousClassName={styles.paginationbutton}
+  nextClassName={styles.paginationbutton}
+  activeClassName={styles.active}
+  pageClassName={styles.paginationbutton}
   
 />
   );

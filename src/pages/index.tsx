@@ -1,4 +1,3 @@
-import "@/styles/globals.css";
 import React, { useState, useEffect } from "react";
 import fetch from "isomorphic-unfetch";
 import Image from "next/image";
@@ -9,6 +8,7 @@ import Pagination from "@/components/Pagination";
 //Types
 import { Movie } from "@/utils/types";
 
+import styles from "@/styles/Home.module.css";
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const moviesPerPage = 10;
@@ -87,7 +87,7 @@ const Home = () => {
     }
   };
   return (
-    <div className="container">
+    <div className={styles.container}>
       <Topbar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
@@ -98,13 +98,13 @@ const Home = () => {
       />
       {isLoading && !isPageLoaded && (
         <div>
-          <div className="loader" />
+          <div className={styles.loader} />
         </div>
       )}
       
-      <ul className="movielist" >
+      <ul className={styles.movielist} >
         {displayedMovies.map((card: Movie) => (
-          <li key={card.id} className="card">
+          <li key={card.id} className={styles.card}>
             <Image
               src={card.medium_cover_image}
               alt={card.title}
@@ -112,10 +112,10 @@ const Home = () => {
               height={345}
             />
 
-            <div className="movieinfo">
+            <div className={styles.movieinfo}>
               <h2>{card.title}</h2>
               <button
-                className="descriptionbtn button"
+                
                 onClick={() => handleMovieClick(card)}
               >
                 {openMovieId === card.id && isDescriptionOpen
@@ -126,7 +126,7 @@ const Home = () => {
                 <div>
                   <div>
                     <span onClick={() => setOpenMovieId(null)}>&times;</span>
-                    <p className="modal">{card.description_full}</p>
+                    <p className={styles.modal}>{card.description_full}</p>
                   </div>
                 </div>
               )}

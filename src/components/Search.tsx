@@ -1,5 +1,6 @@
 import { Movie } from "@/utils/types";
 import Image from "next/image";
+import styles from "@/styles/Home.module.css";
 
 type TopbarProps = {
   searchTerm: string;
@@ -18,7 +19,7 @@ function Topbar(props: TopbarProps) {
     props;
 
   return (
-    <div className="topbar">
+    <div className={styles.topbar}>
       <div>
         <Image
           src="https://i.imgur.com/ptYntKr.png"
@@ -30,7 +31,7 @@ function Topbar(props: TopbarProps) {
         />
       </div>
       <div>
-        <input className="input"
+        <input className={styles.input}
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -40,15 +41,15 @@ function Topbar(props: TopbarProps) {
             }
           }}
         />
-        <button className="searchbutton"
+        <button className={styles.searchbutton}
           onClick={handleSearch}
           title="Este boton buscara la pelicula escrita"
         >
           Search
         </button>
       </div>
-      <div className="qualitybox">
-        <button className="qualitybutton button"
+      <div className={styles.qualitybox}>
+        <button
           title="Apretar para cambiar la calidad del torrent a 1080p o 2160p o 720p"
           onClick={() => {
             if (quality === "720p") {
@@ -63,7 +64,7 @@ function Topbar(props: TopbarProps) {
           {quality}
         </button>
       </div>
-      <div className="signinbox">
+      <div className={styles.signinbox}>
         <button >Sign In</button>
       </div>
     </div>

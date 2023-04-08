@@ -39,7 +39,8 @@ const Home = () => {
       }, 5);
     };
     fetchMovies();
-  }, [sortBy]);
+  }, [sortBy, isPageLoaded]);
+  
 
   useEffect(() => {
     const fetchMovies = async () => {

@@ -1,6 +1,7 @@
 import { Movie } from "@/utils/types";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
+import Link from "next/link";
 
 type TopbarProps = {
   searchTerm: string;
@@ -65,7 +66,14 @@ function Topbar(props: TopbarProps) {
         </button>
       </div>
       <div className={styles.signinbox}>
-        <button >Sign In</button>
+      <Link
+        href={'/register'}
+        passHref>
+        <button
+          title="Apretar para ir a la pagina de registro"
+        >
+        </button>
+      </Link>
       </div>
     </div>
   );

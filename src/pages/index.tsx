@@ -1,164 +1,29 @@
-import React, { useState, useEffect } from "react";
-import fetch from "isomorphic-unfetch";
-import Image from "next/image";
-
-//Components
-import Topbar from "@/components/Search";
-import Pagination from "@/components/Pagination";
-//Types
-import { Movie } from "@/utils/types";
-
-import styles from "@/styles/Home.module.css";
-const Home = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const moviesPerPage = 10;
-
-  const [isSearchClicked, setIsSearchClicked] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [quality, setQuality] = useState("720p");
-  const [sortBy, setSortBy] = useState("download_count");
-  const [openMovieId, setOpenMovieId] = useState<number | null>(null);
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isPageLoaded, setIsPageLoaded] = useState(false);
-
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      setIsLoading(!isPageLoaded); // set loading state to true only on initial page load
-      const randomPage = Math.floor(Math.random() * 30) + 2;
-      const res = await fetch(
-        `https://yts.mx/api/v2/list_movies.json?sort_by=${sortBy}&page=${randomPage}`
-      );
-      const data = await res.json();
-      setMovies(data.data.movies);
-      setTimeout(() => {
-        setIsLoading(false);
-        setIsPageLoaded(true); // set page load state to true
-      }, 5);
-    };
-    fetchMovies();
-  }, [sortBy, isPageLoaded]);
-  
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      if (!isSearchClicked) {
-        return;
-      }
-      setIsLoading(true); // set loading state to true
-      const res = await fetch(
-        `https://yts.mx/api/v2/list_movies.json?query_term=${searchTerm}&sort_by=${sortBy}`
-      );
-      const data = await res.json();
-      if (!data.data.movies) {
-        alert("No hay peliculas con ese nombre!");
-        setIsLoading(false);
-        return;
-      }
-      setMovies(data.data.movies);
-      setIsLoading(false);
-      setIsSearchClicked(false);
-    };
-    fetchMovies();
-  }, [searchTerm, isSearchClicked, sortBy]);
-
-  const handleSearch = () => {
-    setIsSearchClicked(true);
-  };
-
-  const handlePageClick = ({ selected }: { selected: number }) => {
-    setCurrentPage(selected);
-  };
-
-  const displayedMovies = movies.slice(
-    currentPage * moviesPerPage,
-    (currentPage + 1) * moviesPerPage
-  );
-
-  const handleMovieClick = (card: Movie) => {
-    if (openMovieId === card.id) {
-      setOpenMovieId(null);
-      setIsDescriptionOpen(false);
-    } else {
-      setOpenMovieId(card.id);
-      setIsDescriptionOpen(true);
-    }
-  };
+import styles from "@/styles/Index.module.css";
+import Link from "next/link";
+const Index = () => {
   return (
     <div className={styles.container}>
-      <Topbar
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        handleSearch={handleSearch}
-        quality={quality}
-        setQuality={setQuality}
-        displayedMovies={displayedMovies}
-      />
-      {isLoading && !isPageLoaded && (
-        <div>
-          <div className={styles.loader} />
-        </div>
-      )}
+      <div className={styles.box}>
+        <h1>Welcome to our Website</h1>
+        <p>This Website aims for a clean user experience, straight forward to the point and providing nice user experience,   </p>
+        
+        <h2>Who We Are</h2>
+        <p>Our team consists of two college students, each bringing unique perspectives and skills to the table. We are dedicated to staying up-to-date with the latest trends and technologies in our field, and are committed to delivering high-quality work that exceeds our clients and teachers expectations. Whether you need a custom website, a mobile app, or help with your digital marketing strategy, we've got you covered. Let us help you bring your ideas to life!</p>
       
-      <ul className={styles.movielist} >
-        {displayedMovies.map((card: Movie) => (
-          <li key={card.id} className={styles.card}>
-            <Image
-              src={card.medium_cover_image}
-              alt={card.title}
-              width={230}
-              height={345}
-            />
+        <h2>Join Us!</h2>
+        <Link href="/register">
+          <button className={styles.btn}>Register!</button>
+        </Link>
+        or  <Link href="/login">
+          <button className={styles.btn}>Login!</button>
+        </Link>
 
-            <div className={styles.movieinfo}>
-              <h2>{card.title}</h2>
-              <button
-                
-                onClick={() => handleMovieClick(card)}
-              >
-                {openMovieId === card.id && isDescriptionOpen
-                  ? "Close"
-                  : "Movie Description"}
-              </button>
-              {openMovieId === card.id && (
-                <div>
-                  <div>
-                    <span onClick={() => setOpenMovieId(null)}>&times;</span>
-                    <p className={styles.modal}>{card.description_full}</p>
-                  </div>
-                </div>
-              )}
-              <p>Rating: {card.rating}</p>
-              <p>Year: {card.year}</p>
-                
-              <div>
-                {card.torrents &&
-                  card.torrents.map(
-                    (torrent: any) =>
-                      torrent.quality === quality && (
-                        <div key={torrent.url}>
-                          <a href={torrent.url}>
-                            Download Torrent ({torrent.size})
-                          </a>
-                          <p>Seeds: {torrent.seeds}</p>
-                        </div>
-                      )
-                  )}
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <Pagination
-        pageCount={Math.ceil(movies.length / moviesPerPage)}
-        currentPage={currentPage}
-        onPageChange={handlePageClick}
-      />
+        <h2>Our Team</h2>
+        <p> Roberto Nieves / College Student</p>
+        <p> Nicolas Vergara / College Student</p>
+      </div>
     </div>
   );
 };
 
-export default Home;
+export default Index;

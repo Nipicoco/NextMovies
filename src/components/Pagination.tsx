@@ -1,7 +1,10 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   pageCount: number;
@@ -16,16 +19,20 @@ const Pagination: React.FC<Props> = ({
 }) => {
   return (
     <ReactPaginate
-      previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
-      nextLabel={<FontAwesomeIcon icon={faChevronRight} />}
-      breakLabel={"..."}
-      pageCount={pageCount}
-      marginPagesDisplayed={2}
-      pageRangeDisplayed={5}
-      onPageChange={onPageChange}
-      containerClassName={"pagination my-custom-class"}
-      activeClassName={"active"}
-    />
+  previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
+  nextLabel={<FontAwesomeIcon icon={faChevronRight} />}
+  breakLabel={'...'}
+  pageCount={pageCount}
+  marginPagesDisplayed={2}
+  pageRangeDisplayed={5}
+  onPageChange={onPageChange}
+  containerClassName={'pagination'}
+  previousClassName={'pagination-button'}
+  nextClassName={'pagination-button'}
+  activeClassName={'active'}
+  pageClassName={'pagination-button'}
+  
+/>
   );
 };
 

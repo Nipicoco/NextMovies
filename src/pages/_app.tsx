@@ -27,7 +27,7 @@ const Home = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       setIsLoading(!isPageLoaded); // set loading state to true only on initial page load
-      const randomPage = Math.floor(Math.random() * 10) + 1;
+      const randomPage = Math.floor(Math.random() * 30) + 2;
       const res = await fetch(
         `https://yts.mx/api/v2/list_movies.json?sort_by=${sortBy}&page=${randomPage}`
       );

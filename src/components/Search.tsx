@@ -24,7 +24,7 @@ function Topbar(props: TopbarProps) {
           src="https://i.imgur.com/ptYntKr.png"
           alt="Logo"
           width={140}
-          height={40}
+          height={46}
           onClick={handleClick}
           style={{cursor: 'pointer'}} 
         />

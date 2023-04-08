@@ -106,6 +106,7 @@ const Register = () => {
           </div>
           <button
             type="submit"
+            
             className={styles.formButton}
             disabled={!passwordMatch}
           >

@@ -6,6 +6,7 @@ export type Movie = {
     description_full: string;
     medium_cover_image: string;
     torrents: Torrent[];
+    
   };
   
   export type Torrent = {

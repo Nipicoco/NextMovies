@@ -93,8 +93,27 @@ ul {
   margin-right:auto; /* Add this line */
   text-align: center;
 }
+.movie-description-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: black;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .movie-list {
     margin-top: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.movie {
+  margin: 10px;
+  width: 300px;
+  text-align: center;
 }
 #login-button {
   margin-right: 20px;

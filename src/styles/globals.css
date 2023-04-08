@@ -1,7 +1,4 @@
-body {
-  margin: 0;
-  padding: 0px;
-}
+
 .loader {
   border: 16px solid #f3f3f3;
   border-top: 16px solid #3498db;
@@ -27,11 +24,12 @@ body {
   background-attachment: fixed;
   padding-top: 1%;
   padding-bottom: 1%;
-  min-height: 100vh;
+  min-height: 100%;
   width: 100%;
-  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-
 @keyframes gradient {
   0% {
     background-position: 0% 0%;
@@ -46,15 +44,15 @@ body {
 
 
 
-input[type='text'] {
+.input[type='text'] {
   flex: 1;
-  margin-right: 21px;
+  
   padding: 10px;
   font-size: 18px;
   border-radius: 5px;
   border: 2px solid #ccc;
 }
-.quality-box {
+.qualitybox {
   margin-left: 9px;
   padding: 10px;
   font-size: 16px;
@@ -63,9 +61,20 @@ input[type='text'] {
   position: fixed;
   left: 65%;
 }
-
-
-button {
+.searchbutton {
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  margin-left: 10px;
+  background-color: #111111;
+  color: white;
+  cursor: pointer;
+}
+.searchbutton:hover {
+  background-color: #0060df;
+}
+.qualitybox button {
   padding: 10px 20px;
   font-size: 18px;
   border-radius: 5px;
@@ -74,6 +83,10 @@ button {
   color: white;
   cursor: pointer;
 }
+.qualitybox button:hover {
+  background-color: #0060df;
+}
+
 .logo {
   width: 140px;
 }
@@ -81,20 +94,11 @@ button {
   font-size: 1.2rem;
   font-weight: bold;
 }
-* {
-  border: none;
-  outline: none;
-  box-sizing: border-box;
-}
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+
   
 
 
-#topbar {
+.topbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -108,47 +112,48 @@ ul {
   padding: 10px;
 }
 
-#search-box {
-  position: fixed;
-  top: 0;
-  left: 110;
-  width: 100%;
-  background-color: #fff;
-  z-index: 1;
-}
 
 
 
 
 
 
-.signin-box {
+
+.signinbox {
   display: flex;
   align-items: center;
   margin-right: 20px;
 }
 
-.signin-button {
-  margin-left: 10px;
-  padding: 10px;
-  background-color: black;
-  color: #ffffff;
-  border: none;
+
+.signinbox button {
+  padding: 10px 20px;
+  font-size: 18px;
   border-radius: 5px;
+  border: none;
+  background-color: #111111;
+  color: white;
   cursor: pointer;
 }
+.signinbox button:hover {
+  background-color: #0060df;
+}
 
-.movie-info {
+.card:hover {
+  transform: scale(1.02);
+  transition: all 0.3s ease-in-out;
+}
+.movieinfo {
   
   font-family: Arial, sans-serif;
   text-align: justify;
-  max-width: 600px; /* Change this value to your desired max width */
-  margin-left:auto; /* Add this line */
-  margin-right:auto; /* Add this line */
+  max-width: 600px; 
+  margin-right:auto; 
   text-align: center;
   
 }
-.movie-description-button {
+
+.descriptionbtn {
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 5px;
@@ -162,23 +167,29 @@ ul {
   border: 1px solid #ffffff2d;
   border-radius: 10px;
   padding: 10px;
-  background-color: #ffffff2d;
+  background-color: #30252513;
+  margin: 10px;
 }
-.movie-list {
+.movielist {
   margin-top: 70px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  list-style: none;
+  
 }
 
-.movie {
-  margin: 10px;
-  width: 300px;
-  text-align: center;
+@media (max-width: 600px) {
+  .movie-list {
+    flex-direction: column;
+  }
+
 }
 
 
-button:hover {
+
+
+.button:hover {
   background-color: #0060df;
 }
 
@@ -190,15 +201,20 @@ button:hover {
   padding: 0;
 }
 
-.movie {
+.card {
   margin-bottom: 20px;
   text-align: center;
   border: 1px solid #ffffff2d;
   border-radius: 10px;
   padding: 10px;
   background-color: #ffffff4d;
+  margin: 10px;
+  width: 300px;
+  text-align: center;
 }
-.movie img {
+
+
+.card img  {
   border-radius: 10px;
 }
 
@@ -248,21 +264,15 @@ button:hover {
 
 }
 
-h2 {
+.movieinfo h2 {
   font-size: 24px;
   margin-bottom: 10px;
   text-align: center;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-  display: block;
-  margin: 0 auto;
-}
 
-p {
+
+.movieinfo p {
   margin: 0;
   font-size: 16px;
   line-height: 1.5;

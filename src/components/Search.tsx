@@ -18,8 +18,8 @@ function Topbar(props: TopbarProps) {
     props;
 
   return (
-    <div id="topbar">
-      <div className="logo">
+    <div className="topbar">
+      <div>
         <Image
           src="https://i.imgur.com/ptYntKr.png"
           alt="Logo"
@@ -29,8 +29,8 @@ function Topbar(props: TopbarProps) {
           style={{cursor: 'pointer'}} 
         />
       </div>
-      <div className="search-box">
-        <input
+      <div>
+        <input className="input"
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -40,15 +40,15 @@ function Topbar(props: TopbarProps) {
             }
           }}
         />
-        <button
+        <button className="searchbutton"
           onClick={handleSearch}
           title="Este boton buscara la pelicula escrita"
         >
           Search
         </button>
       </div>
-      <div className="quality-box">
-        <button
+      <div className="qualitybox">
+        <button className="qualitybutton button"
           title="Apretar para cambiar la calidad del torrent a 1080p o 2160p o 720p"
           onClick={() => {
             if (quality === "720p") {
@@ -63,8 +63,8 @@ function Topbar(props: TopbarProps) {
           {quality}
         </button>
       </div>
-      <div className="signin-box">
-        <button className="signin-button">Sign In</button>
+      <div className="signinbox">
+        <button >Sign In</button>
       </div>
     </div>
   );

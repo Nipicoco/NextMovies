@@ -76,12 +76,12 @@ const Home = () => {
     (currentPage + 1) * moviesPerPage
   );
 
-  const handleMovieClick = (movie: Movie) => {
-    if (openMovieId === movie.id) {
+  const handleMovieClick = (card: Movie) => {
+    if (openMovieId === card.id) {
       setOpenMovieId(null);
       setIsDescriptionOpen(false);
     } else {
-      setOpenMovieId(movie.id);
+      setOpenMovieId(card.id);
       setIsDescriptionOpen(true);
     }
   };
@@ -96,48 +96,49 @@ const Home = () => {
         displayedMovies={displayedMovies}
       />
       {isLoading && !isPageLoaded && (
-        <div className="loader-container">
+        <div>
           <div className="loader" />
         </div>
       )}
       
-      <ul className="movie-list">
-        {displayedMovies.map((movie: Movie) => (
-          <li key={movie.id} className="movie-item movie">
+      <ul className="movielist" >
+        {displayedMovies.map((card: Movie) => (
+          <li key={card.id} className="card">
             <Image
-              src={movie.medium_cover_image}
-              alt={movie.title}
+              src={card.medium_cover_image}
+              alt={card.title}
               width={230}
               height={345}
             />
 
-            <div className="movie-info">
-              <h2>{movie.title}</h2>
+            <div className="movieinfo">
+              <h2>{card.title}</h2>
               <button
-                className="movie-description-button"
-                onClick={() => handleMovieClick(movie)}
+                className="descriptionbtn button"
+                onClick={() => handleMovieClick(card)}
               >
-                {openMovieId === movie.id && isDescriptionOpen
+                {openMovieId === card.id && isDescriptionOpen
                   ? "Close"
                   : "Movie Description"}
               </button>
-              {openMovieId === movie.id && (
-                <div className="movie-info">
+              {openMovieId === card.id && (
+                <div>
                   <div>
                     <span onClick={() => setOpenMovieId(null)}>&times;</span>
-                    <p className="modal">{movie.description_full}</p>
+                    <p className="modal">{card.description_full}</p>
                   </div>
                 </div>
               )}
-              <p>Rating: {movie.rating}</p>
-              <p>Year: {movie.year}</p>
+              <p>Rating: {card.rating}</p>
+              <p>Year: {card.year}</p>
+                
               <div>
-                {movie.torrents &&
-                  movie.torrents.map(
+                {card.torrents &&
+                  card.torrents.map(
                     (torrent: any) =>
                       torrent.quality === quality && (
                         <div key={torrent.url}>
-                          <a href={torrent.url} className="torrent-link">
+                          <a href={torrent.url}>
                             Download Torrent ({torrent.size})
                           </a>
                           <p>Seeds: {torrent.seeds}</p>

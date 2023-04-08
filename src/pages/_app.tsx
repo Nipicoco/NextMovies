@@ -20,15 +20,23 @@ const Home = () => {
   const [sortBy, setSortBy] = useState("download_count");
   const [openMovieId, setOpenMovieId] = useState<number | null>(null);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
+
 
   useEffect(() => {
     const fetchMovies = async () => {
+      setIsLoading(!isPageLoaded); // set loading state to true only on initial page load
       const randomPage = Math.floor(Math.random() * 10) + 1;
       const res = await fetch(
-        `https://yts.mx/api/v2/list_movies.json?sort_by=download_count&page=${randomPage}`
+        `https://yts.mx/api/v2/list_movies.json?sort_by=${sortBy}&page=${randomPage}`
       );
       const data = await res.json();
       setMovies(data.data.movies);
+      setTimeout(() => {
+        setIsLoading(false);
+        setIsPageLoaded(true); // set page load state to true
+      }, 5);
     };
     fetchMovies();
   }, [sortBy]);
@@ -38,15 +46,18 @@ const Home = () => {
       if (!isSearchClicked) {
         return;
       }
+      setIsLoading(true); // set loading state to true
       const res = await fetch(
         `https://yts.mx/api/v2/list_movies.json?query_term=${searchTerm}&sort_by=${sortBy}`
       );
       const data = await res.json();
       if (!data.data.movies) {
         alert("No hay peliculas con ese nombre!");
+        setIsLoading(false);
         return;
       }
       setMovies(data.data.movies);
+      setIsLoading(false);
       setIsSearchClicked(false);
     };
     fetchMovies();
@@ -84,6 +95,12 @@ const Home = () => {
         setQuality={setQuality}
         displayedMovies={displayedMovies}
       />
+      {isLoading && !isPageLoaded && (
+        <div className="loader-container">
+          <div className="loader" />
+        </div>
+      )}
+      
       <ul className="movie-list">
         {displayedMovies.map((movie: Movie) => (
           <li key={movie.id} className="movie-item movie">

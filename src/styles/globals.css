@@ -144,8 +144,8 @@
   transition: all 0.3s ease-in-out;
 }
 .movieinfo {
-  
-  font-family: Arial, sans-serif;
+
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode';
   text-align: justify;
   max-width: 600px; 
   margin-right:auto; 
@@ -156,12 +156,13 @@
 .descriptionbtn {
   margin-top: 5px;
   margin-bottom: 5px;
-  padding: 5px;
+  padding: 10px;
   background-color: black;
   color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: medium;
 }
 .modal {
   border: 1px solid #ffffff2d;
@@ -223,8 +224,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 2%;
-  padding-bottom: 2%;
   font-size: larger;
 
 }

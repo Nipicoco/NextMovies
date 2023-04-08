@@ -1,32 +1,17 @@
 import "@/styles/globals.css";
 import React, { useState, useEffect } from "react";
 import fetch from "isomorphic-unfetch";
-import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Image from 'next/image';
 
+//Components
+import Topbar from "@/components/Search"; 
+import Pagination from "@/components/Pagination";
+import MovieList from "@/components/MovieCard";
+//Types
+import { Movie } from "@/utils/types";
 
-type Movie = {
-  id: number;
-  title: string;
-  year: number;
-  rating: number;
-  description_full: string;
-  medium_cover_image: string;
-  torrents: {
-    url: string;
-    hash: string;
-    quality: string;
-    type: string;
-    seeds: number;
-    peers: number;
-    size: string;
-    size_bytes: number;
-    date_uploaded: string;
-    date_uploaded_unix: number;
-  }[];
-};
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -42,93 +27,48 @@ const Home = () => {
     const fetchMovies = async () => {
       const randomPage = Math.floor(Math.random() * 10) + 1;
       const res = await fetch(
-        `https://yts.mx/api/v2/list_movies.json?sort_by=download_count&page=${randomPage}`
-      );
+        `https://yts.mx/api/v2/list_movies.json?sort_by=download_count&page=${randomPage}`);
       const data = await res.json();
       setMovies(data.data.movies);
     };
-
     fetchMovies();
   }, [sortBy]);
-
+  
   useEffect(() => {
     const fetchMovies = async () => {
       if (!isSearchClicked) {
-        return;
-      }
-
+        return;}
       const res = await fetch(
-        `https://yts.mx/api/v2/list_movies.json?query_term=${searchTerm}&sort_by=${sortBy}`
-      );
+        `https://yts.mx/api/v2/list_movies.json?query_term=${searchTerm}&sort_by=${sortBy}`);
       const data = await res.json();
-
       if (!data.data.movies) {
         alert("No hay peliculas con ese nombre!");
-        return;
-      }
-
+        return;}
       setMovies(data.data.movies);
       setIsSearchClicked(false);
     };
-
     fetchMovies();
   }, [searchTerm, isSearchClicked, sortBy]);
-
   const handleSearch = () => {
     setIsSearchClicked(true);
   };
-  
   const handlePageClick = ({ selected }: { selected: number }) => {
     setCurrentPage(selected);
   };
-  
-
   const displayedMovies = movies.slice(
     currentPage * moviesPerPage,
     (currentPage + 1) * moviesPerPage
   );
   return (
     <div className="container">
-      <div id="topbar">
-        <div className="logo">  
-          <Image src="https://i.imgur.com/ptYntKr.png" alt="Logo" width={140} height={40}/>
-        </div>
-        <div className="search-box">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSearch();
-              }
-            }}
-          />
-          <button
-            onClick={handleSearch}
-            title="Este boton buscara la pelicula escrita"
-          >
-            Search
-          </button>
-        </div>
-        <div className="quality-box">
-          <button
-            title="Apretar para cambiar la calidad del torrent a 1080p o 2160p o 720p"
-            className="quality-button"
-            onClick={() => {
-              if (quality === "720p") {
-                setQuality("1080p");
-              } else if (quality === "1080p") {
-                setQuality("2160p");
-              } else {
-                setQuality("720p");
-              }
-            }}
-          >
-            {quality}
-          </button>
-        </div>
-      </div>
+      <Topbar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        handleSearch={handleSearch}
+        quality={quality}
+        setQuality={setQuality}
+        displayedMovies={displayedMovies}
+      />
       <ul className="movie-list">
         {displayedMovies.map((movie: Movie) => (
           <li key={movie.id} className="movie-item">
@@ -156,18 +96,11 @@ const Home = () => {
           </li>
         ))}
       </ul>
-      <ReactPaginate
-        previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
-        nextLabel={<FontAwesomeIcon icon={faChevronRight} />}
-        breakLabel={"..."}
+      <Pagination 
         pageCount={Math.ceil(movies.length / moviesPerPage)}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
+        currentPage={currentPage}
         onPageChange={handlePageClick}
-        containerClassName={"pagination my-custom-class"}
-        activeClassName={"active"}
       />
-
     </div>
   );
 };

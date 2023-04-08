@@ -6,7 +6,7 @@ const Register = () => {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     try {
@@ -32,7 +32,8 @@ const Register = () => {
     } catch (err) {
       console.error(err);
       setMessage(null);
-      setError('Unable to connect to the server');
+      setError(null);
+
     }
   };
 

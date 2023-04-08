@@ -4,16 +4,29 @@ body {
 }
 
 .container {
-  
-  background-color: #00DBDE;
-  background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+  background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
   padding-top: 1%;
-  height: 100%;
   padding-bottom: 1%;
   min-height: 100vh;
   width: 100%;
   margin: 0 auto;
 }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
 
 
 input[type='text'] {
@@ -24,6 +37,16 @@ input[type='text'] {
   border-radius: 5px;
   border: 2px solid #ccc;
 }
+.quality-box {
+  margin-left: 9px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  text-align: center;
+  position: fixed;
+  left: 65%;
+}
+
 
 button {
   padding: 10px 20px;
@@ -44,6 +67,7 @@ button {
 * {
   border: none;
   outline: none;
+  box-sizing: border-box;
 }
 ul {
   list-style: none;
@@ -56,7 +80,7 @@ ul {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,33 +89,45 @@ ul {
   padding: 10px;
 }
 
+#search-box {
+  position: fixed;
+  top: 0;
+  left: 110;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+}
 
-.quality-button {
+
+
+
+
+
+.signin-box {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.signin-button {
+  margin-left: 10px;
+  padding: 10px;
+  background-color: black;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
-  padding: 11px;
-  margin-right: 80px;
-  font-size: 16px;
-  font-weight: bold;
   cursor: pointer;
-  margin-left: -200px;
 }
 
-#search-box {
-  display: block;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-
-  margin: 0 auto;
-}
 .movie-info {
+  
   font-family: Arial, sans-serif;
   text-align: justify;
   max-width: 800px; /* Change this value to your desired max width */
   margin-left:auto; /* Add this line */
   margin-right:auto; /* Add this line */
   text-align: center;
+  
 }
 .movie-description-button {
   margin-top: 5px;
@@ -103,7 +139,12 @@ ul {
   border-radius: 5px;
   cursor: pointer;
 }
-
+.modal {
+  border: 1px solid #ffffff2d;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #ffffff2d;
+}
 .movie-list {
     margin-top: 70px;
     display: flex;
@@ -115,30 +156,7 @@ ul {
   width: 300px;
   text-align: center;
 }
-#login-button {
-  margin-right: 20px;
-  padding: 10px;
-  background-color: black;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-#login-button:hover {
-  background-color: #0060df;
-}
-#register-button {
-  margin-right: 20px;
-  padding: 10px;
-  background-color:black;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-#register-button:hover {
-  background-color: #0060df;
-}
+
 
 button:hover {
   background-color: #0060df;
@@ -202,7 +220,15 @@ button:hover {
 .movie {
   margin-bottom: 20px;
   text-align: center;
+  border: 1px solid #ffffff2d;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #ffffff4d;
 }
+.movie img {
+  border-radius: 10px;
+}
+
 
 h2 {
   font-size: 24px;

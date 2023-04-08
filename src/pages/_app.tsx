@@ -11,7 +11,7 @@ import { Movie } from "@/utils/types";
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const moviesPerPage = 5;
+  const moviesPerPage = 10;
 
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -93,28 +93,25 @@ const Home = () => {
               width={230}
               height={345}
             />
-            
+
             <div className="movie-info">
               <h2>{movie.title}</h2>
               <button
                 className="movie-description-button"
                 onClick={() => handleMovieClick(movie)}
               >
-                {openMovieId === movie.id && isDescriptionOpen ? "Close" : "Movie Description"}
+                {openMovieId === movie.id && isDescriptionOpen
+                  ? "Close"
+                  : "Movie Description"}
               </button>
-            {openMovieId === movie.id && (
-              <div className="movie-info">
-                <div>
-                  <span
-                    
-                    onClick={() => setOpenMovieId(null)}
-                  >
-                    &times;
-                  </span>
-                  <p>{movie.description_full}</p>
+              {openMovieId === movie.id && (
+                <div className="movie-info">
+                  <div>
+                    <span onClick={() => setOpenMovieId(null)}>&times;</span>
+                    <p className="modal">{movie.description_full}</p>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
               <p>Rating: {movie.rating}</p>
               <p>Year: {movie.year}</p>
               <div>
@@ -132,7 +129,6 @@ const Home = () => {
                   )}
               </div>
             </div>
-      
           </li>
         ))}
       </ul>

@@ -40,7 +40,6 @@ function Topbar(props: TopbarProps) {
         <div className="quality-box">
           <button
             title="Apretar para cambiar la calidad del torrent a 1080p o 2160p o 720p"
-            className="quality-button"
             onClick={() => {
               if (quality === "720p") {
                 setQuality("1080p");
@@ -54,6 +53,9 @@ function Topbar(props: TopbarProps) {
             {quality}
           </button>
         </div>
+        <div className="signin-box">
+        <button className="signin-button">Sign In</button>
+      </div>
       </div>
     );
 }

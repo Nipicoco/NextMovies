@@ -1,74 +1,72 @@
-import { useState } from 'react';
-import axios, { AxiosBasicCredentials } from 'axios';
+import { useState } from "react";
+import axios from "axios";
 
-export default function Home() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [second, setSecond] = useState('');
-  
-  const handleSubmit = async (event: { preventDefault: () => void; }) => {
-    event.preventDefault();
+export default function Find2() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-    const formData = {
-      Field1: name,
-      Field2: second,
-      Field3: email,
-    };
-
-    const options = {
-      method: 'POST',
-      url: 'https://nipicoco.wufoo.com/api/v3/forms/q1o9nf8l199r4ia/entries.json',
-      auth: {
-        username: 'VRKY-WG80-IFIJ-QEKF',
-        password: 'GVF7HM4eree.B8@'
-      } as AxiosBasicCredentials,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: JSON.stringify(formData)
-    };
-
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
     try {
-      const response = await axios(options);
-      console.log(response.data);
+      const response = await axios.post(
+        "https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/findOne",
+        {
+          database: "movies",
+          dataSource: "nextjs",
+          collection: "users",
+          filter: { email: email },
+        },
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '* ',
+            "Content-Type": "application/json",
+            "Access-Control-Request-Headers": "*",
+            "api-key":
+              "J0cohJmGqJP5pzyqAkk2sXiiUBJcIUUSYqbGubhwPzabRUBtxU4FEARcXmOBCX8U",
+            Accept: "application/ejson",
+          },
+        }
+      );
+      const result = response.data.document;
+      if (result === null) {
+        setMessage("Email not found");
+      } else if (result.password === password) {
+        setMessage("Signed in successfully");
+      } else {
+        setMessage("Incorrect password");
+      }
     } catch (error) {
-      console.error(error);
+      setMessage(`Error`);
     }
   };
 
   return (
     <div>
-      <h1>Contact Us</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
-        <label  htmlFor="second">Second:</label>
-        <input
-
-          type="text"
-          id="second"
-          name="second"
-          value={second}
-          onChange={(event) => setSecond(event.target.value)}
-        />
-        
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-
-        <button type="submit">Submit</button>
+        <label>
+          Email:
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        <br />
+        <button type="submit">Sign In</button>
       </form>
+      <p>{message}</p>
     </div>
   );
 }

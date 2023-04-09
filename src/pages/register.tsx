@@ -26,7 +26,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/api/index', {
+      const response = await fetch('/api/connector', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

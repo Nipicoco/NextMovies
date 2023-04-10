@@ -38,7 +38,7 @@ const LoginForm = () => {
           } else if (result.document.password === password) {
             setSuccessMessage(`Logged in successfully with Username: ${username}`);
             setTimeout(() => {
-              window.location.href = '/movies';
+              window.location.href = 'NextMovies/movies';
             }, 1500);
           } else {
             setErrorMessage('Incorrect password');

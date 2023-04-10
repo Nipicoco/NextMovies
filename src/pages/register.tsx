@@ -50,7 +50,8 @@ const Register = () => {
       setSuccessMessage(`Form submitted successfully with Username: ${username} Password: ${password}`);
       //timeout to redirect to movies page after 3 seconds
       setTimeout(() => {
-        window.location.href = '/NextMovies/movies';
+        // use router to redirect to home page
+        router.push('/movies');
       }, 1500);
     } catch (error) {
       console.log(error);

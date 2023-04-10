@@ -69,10 +69,8 @@ function Topbar(props: TopbarProps) {
       <Link
         href={'/login'}
         passHref>
-        <button
-          title="Log Out"
-        >
-          Log Out
+        <button>
+          Sign out
         </button>
       </Link>
       </div>

@@ -67,11 +67,12 @@ function Topbar(props: TopbarProps) {
       </div>
       <div className={styles.signinbox}>
       <Link
-        href={'/register'}
+        href={'/login'}
         passHref>
         <button
-          title="Apretar para ir a la pagina de registro"
+          title="Log Out"
         >
+          Log Out
         </button>
       </Link>
       </div>

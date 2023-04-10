@@ -3,11 +3,13 @@ import axios from 'axios';
 import styles from '@/styles/Login.module.css';
 import { useRouter } from 'next/router';
 import { v4 as uuidv4 } from 'uuid';
-
-
 import TopbarLogin from '@/components/LoginTop';
+import RickRollPage from '@/utils/rickroll';
 
 const LoginForm = () => {
+  
+  RickRollPage();
+
   const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -18,7 +20,7 @@ const LoginForm = () => {
     e.preventDefault();
     
     
-    const url = 'https://proxymovies.herokuapp.com/https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/findOne';
+    const api = 'https://proxymovies.herokuapp.com/https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/findOne';
     const payload = {
       collection: 'users',
       database: 'movies',
@@ -30,7 +32,7 @@ const LoginForm = () => {
       'api-key': 'J0cohJmGqJP5pzyqAkk2sXiiUBJcIUUSYqbGubhwPzabRUBtxU4FEARcXmOBCX8U', 
     };
     try {
-        const response = await axios.post(url, payload, { headers: headers });
+        const response = await axios.post(api, payload, { headers: headers });
       
         if (response.status === 200) {
           const result = response.data;

@@ -8,9 +8,10 @@ import Pagination from "@/components/Pagination";
 
 //Types
 import { Movie } from "@/utils/types";
+import RickRollPage from "@/utils/rickroll";
 //Styles
 import styles from "@/styles/Home.module.css";
-//Utils
+
 
 
 const Home = () => {
@@ -27,14 +28,10 @@ const Home = () => {
   const [isPageLoaded, setIsPageLoaded] = useState(false);
 
   
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      alert('Not signed in');
-      router.push('/login'); // redirect to login page if token is not present
-    }
-    
-  }, []);
+
+
+  RickRollPage();
+
   
   useEffect(() => {
     const fetchMovies = async () => {
@@ -53,6 +50,8 @@ const Home = () => {
     fetchMovies();
   }, [sortBy, isPageLoaded]);
   
+  //avoid users from using right click or opening dev tools
+
 
   useEffect(() => {
     const fetchMovies = async () => {

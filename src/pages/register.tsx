@@ -3,10 +3,14 @@ import styles from '@/styles/Register.module.css';
 import TopbarRegister from '@/components/RegisterTop';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import RickRollPage from '@/utils/rickroll';
+
+
 
 const Register = () => {
+  RickRollPage();
   const router = useRouter();
-
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

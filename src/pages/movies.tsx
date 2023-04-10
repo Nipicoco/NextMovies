@@ -5,15 +5,17 @@ import Image from "next/image";
 //Components
 import Topbar from "@/components/Search";
 import Pagination from "@/components/Pagination";
+
 //Types
 import { Movie } from "@/utils/types";
-
+//Styles
 import styles from "@/styles/Home.module.css";
+//Utils
+
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const moviesPerPage = 10;
-
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState<Movie[]>([]);

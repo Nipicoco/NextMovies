@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import styles from '@/styles/Register.module.css';
 import TopbarRegister from '@/components/RegisterTop';
+import axios from 'axios';
 
 const Register = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const [message, setMessage] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(true);
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -24,33 +24,33 @@ const Register = () => {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    const url = 'https://cors-anywhere.herokuapp.com/https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/insertOne';
+    const payload = {
+      collection: 'users',
+      database: 'movies',
+      dataSource: 'nextjs',
+      document: {
+        username: username,
+        password: password
+      }
+    };
+    const headers = {
+      'Content-Type': 'application/json',
+      'api-key': 'J0cohJmGqJP5pzyqAkk2sXiiUBJcIUUSYqbGubhwPzabRUBtxU4FEARcXmOBCX8U', 
+    };
 
     try {
-      const response = await fetch('/api/connector', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await axios.post(url, payload, { headers: headers });
+      console.log(response.data);
 
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log(data);
-        setMessage(data.message);
-        setError(null);
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
-      } else {
-        setMessage(null);
-        setError(data.error);
-      }
-    } catch (err) {
-      console.error(err);
-      setMessage(null);
-      setError(null);
+      // Set the success message on successful form submission with user email and password
+      setSuccessMessage(`Form submitted successfully with Username: ${username} Password: ${password}`);
+      //timeout to redirect to movies page after 3 seconds
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 1500);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -63,14 +63,14 @@ const Register = () => {
         <form onSubmit={handleSubmit} className={styles.form}>
           <h1 className={styles.formTitle}>Register</h1>
           <div className={styles.formGroup}>
-            <label htmlFor="email" className={styles.formLabel}>
-              Email:
+            <label htmlFor="username" className={styles.formLabel}>
+              Username:
             </label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="username"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className={styles.formInput}
               required
             />
@@ -111,8 +111,10 @@ const Register = () => {
           >
             Register
           </button>
-          {error && <p className={styles.formError}>{error}</p>}
-          {message && <p className={styles.formMessage}>{message}</p>}
+          <div className={styles.succes}
+          >{successMessage}
+
+          </div>
         </form>
       </div>
     </div>

@@ -7,7 +7,7 @@ const handleClick = () => {
   window.location.reload();
 };
 
-function TopbarRegister() {
+function TopbarLogin() {
 
 
   return (
@@ -25,12 +25,14 @@ function TopbarRegister() {
       
       <div className={styles.signinbox}>
         
-        <Link href="/login">
-              <button>Login</button>
+        <Link href="/register">
+            <button>Register</button>
         </Link>
+
+
       </div>
     </div>
   );
 }
 
-export default TopbarRegister;
+export default TopbarLogin;

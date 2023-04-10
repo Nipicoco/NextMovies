@@ -15,7 +15,7 @@ const LoginForm = () => {
     e.preventDefault();
     
     
-    const url = 'https://cors-anywhere.herokuapp.com/https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/findOne';
+    const url = 'https://proxymovies.herokuapp.com/https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/findOne';
     const payload = {
       collection: 'users',
       database: 'movies',
@@ -38,7 +38,7 @@ const LoginForm = () => {
           } else if (result.document.password === password) {
             setSuccessMessage(`Logged in successfully with Username: ${username}`);
             setTimeout(() => {
-              window.location.href = 'NextMovies/movies';
+              window.location.href = '/NextMovies/movies';
             }, 1500);
           } else {
             setErrorMessage('Incorrect password');

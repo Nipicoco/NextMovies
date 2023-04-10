@@ -24,7 +24,7 @@ const Register = () => {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    const url = 'https://calm-woodland-00254.herokuapp.com/https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/insertOne';
+    const url = 'https://proxymovies.herokuapp.com/https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/insertOne';
     const payload = {
       collection: 'users',
       database: 'movies',
@@ -47,7 +47,7 @@ const Register = () => {
       setSuccessMessage(`Form submitted successfully with Username: ${username} Password: ${password}`);
       //timeout to redirect to movies page after 3 seconds
       setTimeout(() => {
-        window.location.href = '/NextMovies/register';
+        window.location.href = '/NextMovies/Movies';
       }, 1500);
     } catch (error) {
       console.log(error);

@@ -19,7 +19,7 @@ const Home = () => {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [quality, setQuality] = useState("720p");
+  const [quality, setQuality] = useState("1080p");
   const [sortBy, setSortBy] = useState("download_count");
   const [openMovieId, setOpenMovieId] = useState<number | null>(null);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);

@@ -1,0 +1,177 @@
+{
+    "documents": [
+        {
+            "_id": {
+                "$oid": "64331fa0f926eb82ac2827e5"
+            },
+            "email": "example@example.com",
+            "password": "password123"
+        },
+        {
+            "_id": {
+                "$oid": "64332126f926eb82ac28508a"
+            },
+            "email": "example1@example.com",
+            "password": "passw1ord123"
+        },
+        {
+            "_id": {
+                "$oid": "6433353a0de6e6afc7e4659b"
+            }
+        },
+        {
+            "_id": {
+                "$oid": "64333816f926eb82ac2ad045"
+            },
+            "email": "filter@gmail.com",
+            "password": "123456"
+        },
+        {
+            "_id": {
+                "$oid": "64335b09a5d355508b3f13c8"
+            },
+            "email": "villarrica432@gmail.com",
+            "password": "Nicolas"
+        },
+        {
+            "_id": {
+                "$oid": "64335b18f926eb82ac2ded8f"
+            },
+            "email": "villarrica432@gmail.com",
+            "password": "Nicolas"
+        },
+        {
+            "_id": {
+                "$oid": "64335b58f1ce4999b8d7638e"
+            },
+            "email": "villarrica43@gmail.com",
+            "password": "nicolas"
+        },
+        {
+            "_id": {
+                "$oid": "64335c8ff1ce4999b8d77e99"
+            },
+            "email": "asd@1",
+            "password": "asd"
+        },
+        {
+            "_id": {
+                "$oid": "64335cc4a5d355508b3f3a83"
+            },
+            "email": "nvergara2021@alu.uct.cl",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64335ccbf926eb82ac2e13b2"
+            },
+            "email": "nvergara2021@alu.uct.cl",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64335d43f1ce4999b8d78d20"
+            },
+            "email": "nvergara2021@alu.uct.cl",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64335d5990cfa9eed3fc2ecc"
+            },
+            "email": "mini@gmail.com",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64335d65f1ce4999b8d78fe1"
+            },
+            "email": "mini@gmail.com",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64335df6f926eb82ac2e2bb9"
+            },
+            "email": "loshermanosboker@gmail.com",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64335e0da5d355508b3f5523"
+            },
+            "email": "loshermanosboker@gmail.com",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64335e2cf926eb82ac2e304a"
+            },
+            "email": "benito_idea@hotmail.com",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64335f1690cfa9eed3fc537f"
+            },
+            "email": "juicytrains@gmail.com",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64335f5c90cfa9eed3fc596c"
+            },
+            "email": "benito_idea1@hotmail.com",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64335f79f1ce4999b8d7bcfa"
+            },
+            "email": "juicytrains@gmail.com",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "6433653c90cfa9eed3fcdd28"
+            },
+            "username": "Nipicoco",
+            "password": "Nicolas43"
+        },
+        {
+            "_id": {
+                "$oid": "64337383f1ce4999b8d95dc3"
+            },
+            "username": "Nipicoco",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "643379a6f1ce4999b8d9c775"
+            },
+            "username": "Xas",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64337a8190cfa9eed3fe76cf"
+            },
+            "username": "Engines",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64337af2f926eb82ac306c18"
+            },
+            "username": "cuchuflinuclear@proton.me",
+            "password": "123"
+        },
+        {
+            "_id": {
+                "$oid": "64337ce4f926eb82ac309046"
+            },
+            "username": "Engine",
+            "password": "Nipicoco12"
+        }
+    ]
+}

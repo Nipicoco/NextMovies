@@ -57,6 +57,20 @@ const Register = () => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    //if token is not present in local storage, redirect to login page
+    if (!localStorage.getItem("token")) {
+      console.log('No token found');
+      
+    }
+    else {
+      console.log('Token found');
+      alert('Already logged in');
+      console.log('Token:', localStorage.getItem("token"));
+      console.log('Username:', localStorage.getItem("username"));
+      router.push('/movies');
+    }
+  }, []);
 
   return (
     <div>

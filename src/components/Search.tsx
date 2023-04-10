@@ -2,6 +2,18 @@ import { Movie } from "@/utils/types";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
+import router, { useRouter } from 'next/router';
+import { useEffect, useState } from "react";
+
+const signOut = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('username');
+  if (!localStorage.getItem('token')) {
+    console.log('Token removed');
+  }
+  router.push('/login');
+};
+
 
 type TopbarProps = {
   searchTerm: string;
@@ -16,6 +28,14 @@ const handleClick = () => {
 };
 
 function Topbar(props: TopbarProps) {
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
   const { searchTerm, setSearchTerm, handleSearch, quality, setQuality } =
     props;
 
@@ -65,14 +85,15 @@ function Topbar(props: TopbarProps) {
           {quality}
         </button>
       </div>
+      <p className={styles.user}>{username}</p>
       <div className={styles.signinbox}>
-      <Link
-        href={'/login'}
-        passHref>
-        <button>
-          Sign out
+      
+        <button
+          title="Apretar para cerrar sesion"
+          onClick={signOut}
+        >
+          Sign Out
         </button>
-      </Link>
       </div>
     </div>
   );

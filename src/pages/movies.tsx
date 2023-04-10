@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import fetch from "isomorphic-unfetch";
 import Image from "next/image";
-
+import router from "next/router";
 //Components
 import Topbar from "@/components/Search";
 import Pagination from "@/components/Pagination";
@@ -26,7 +26,16 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isPageLoaded, setIsPageLoaded] = useState(false);
 
-
+  
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Not signed in');
+      router.push('/login'); // redirect to login page if token is not present
+    }
+    
+  }, []);
+  
   useEffect(() => {
     const fetchMovies = async () => {
       setIsLoading(!isPageLoaded); // set loading state to true only on initial page load

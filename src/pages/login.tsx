@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from '@/styles/Login.module.css';
 import { useRouter } from 'next/router';
+import { v4 as uuidv4 } from 'uuid';
+
 
 import TopbarLogin from '@/components/LoginTop';
 
@@ -37,11 +39,14 @@ const LoginForm = () => {
             setErrorMessage('Username not found');
             setSuccessMessage('');
           } else if (result.document.password === password) {
+            const token = uuidv4();
+            localStorage.setItem('token', token);
+            localStorage.setItem('username', username);
             setSuccessMessage(`Logged in successfully with Username: ${username}`);
             setTimeout(() => {
-              // use router to redirect to home page
               router.push('/movies');
-            }, 1500);
+              
+        }, 1500);
           } else {
             setErrorMessage('Incorrect password');
             setSuccessMessage('');
@@ -53,7 +58,16 @@ const LoginForm = () => {
         console.log(error);
       }
     };
+   
+  //console log the token as soon as the page loads
+  useEffect(() => {
+    //if token is not present in local storage, redirect to login page
+    if (!localStorage.getItem("token")) {
+      console.log('No token found');
+    }
+  }, []);
 
+  
       
 
   return (

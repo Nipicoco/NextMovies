@@ -60,6 +60,16 @@
   border-radius: 5px;
   border: 2px solid #ccc;
 }
+
+.signinbox p{
+  margin-left: 9px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  text-align: center;
+  position: fixed;
+  right: 15%;
+}
 .qualitybox {
   margin-left: 9px;
   padding: 10px;
@@ -68,6 +78,15 @@
   text-align: center;
   position: fixed;
   left: 65%;
+}
+.adminbutton {
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  background-color: #111111;
+  color: white;
+  cursor: pointer;
 }
 .searchbutton {
   padding: 10px 20px;

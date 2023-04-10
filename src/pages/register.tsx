@@ -8,7 +8,6 @@ import RickRollPage from '@/utils/rickroll';
 
 
 const Register = () => {
-  RickRollPage();
   const router = useRouter();
   
   const [username, setUsername] = useState('');

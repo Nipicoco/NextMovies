@@ -1,7 +1,6 @@
 import { Movie } from "@/utils/types";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
-import Link from "next/link";
 import router, { useRouter } from 'next/router';
 import { useEffect, useState } from "react";
 
@@ -36,6 +35,9 @@ function Topbar(props: TopbarProps) {
       setUsername(storedUsername);
     }
   }, []);
+
+  const isAdmin = username === "admin";
+  
   const { searchTerm, setSearchTerm, handleSearch, quality, setQuality } =
     props;
 
@@ -69,6 +71,9 @@ function Topbar(props: TopbarProps) {
           Search
         </button>
       </div>
+      
+      
+
       <div className={styles.qualitybox}>
         <button
           title="Apretar para cambiar la calidad del torrent a 1080p o 2160p o 720p"
@@ -85,9 +90,19 @@ function Topbar(props: TopbarProps) {
           {quality}
         </button>
       </div>
-      <p className={styles.user}>{username}</p>
-      <div className={styles.signinbox}>
       
+      <div className={styles.signinbox}>
+          <p >{username}</p>
+          {isAdmin && (
+            
+            <button className={styles.adminbutton}
+              title="Apretar para ver los usuarios"
+              onClick={() => router.push("/admin")}
+            >
+              Users
+            </button>
+          
+        )}
         <button
           title="Apretar para cerrar sesion"
           onClick={signOut}

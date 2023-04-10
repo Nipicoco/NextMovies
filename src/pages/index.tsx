@@ -1,7 +1,12 @@
 import styles from "@/styles/Index.module.css";
 import Link from "next/link";
+
+
+
 const Index = () => {
+
   return (
+    
     <div className={styles.container}>
       <div className={styles.box}>
         <h1>Welcome to our Website</h1>

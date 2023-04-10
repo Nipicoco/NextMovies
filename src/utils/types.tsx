@@ -22,3 +22,12 @@ export type Movie = {
     date_uploaded_unix: number;
   };
   
+  export type User = {
+    _id: string;
+    username: string;
+    password: string;
+    users: User[];
+  }
+  
+
+  

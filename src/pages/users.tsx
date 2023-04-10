@@ -1,8 +1,6 @@
-import React from 'react';
-import fetch from 'isomorphic-unfetch';
-import { NextPage } from 'next';
-import styles from '@/styles/Users.module.css';
-
+import { useState } from "react";
+import styles from "@/styles/Users.module.css";
+ 
 interface User {
   _id: string;
   username: string;
@@ -12,42 +10,67 @@ interface User {
 interface Props {
   users: User[];
 }
+const Users = ({ users }: Props) => {
+  const [loadedUsers, setLoadedUsers] = useState(users);
 
-const Home: NextPage<Props> = (props) => {
+  const handleUsers = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    const url =
+      "https://proxymovies.herokuapp.com/https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/find";
+    const payload = {
+      collection: "users",
+      database: "movies",
+      dataSource: "nextjs",
+      filter: {},
+    };
+    const headers = {
+      "Content-Type": "application/json",
+      "api-key":
+        "J0cohJmGqJP5pzyqAkk2sXiiUBJcIUUSYqbGubhwPzabRUBtxU4FEARcXmOBCX8U",
+    };
+    const res = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+    const users = data.documents;
+
+    setLoadedUsers(users);
+  };
+
   return (
     <div className={styles.container}>
-      <ul className={styles.form}>
-      <h1 className={styles.Title}>Users</h1>
-        {props.users.map(user => (
-          <li key={user._id} className={styles.Users}>
-            <p>Username: {user.username}</p>
-            <p>Password: {user.password}</p>
-          </li>
-        ))}
-      </ul>
+    <div className={styles.userlist}>
+      <div>
+        <button onClick={handleUsers} className={styles.button}>
+          Get Users
+        </button>
+        <div>
+          <div>
+            <div>
+              <h1>Users</h1>
+            </div>
+            <div>
+              <table className={styles.formgroup}>
+                <tbody>
+                  {loadedUsers &&
+                    loadedUsers.map((user) => (
+                      <tr key={user._id}>
+                        <td>{user.username}</td>
+                        <td>{user.password}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   );
 };
 
-Home.getInitialProps = async function() {
-  const res = await fetch('https://proxymovies.herokuapp.com/https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/find', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Request-Headers': '*',
-      'api-key': 'J0cohJmGqJP5pzyqAkk2sXiiUBJcIUUSYqbGubhwPzabRUBtxU4FEARcXmOBCX8U',
-      'Accept': 'application/ejson'
-    },
-    body: JSON.stringify({
-      database: 'movies',
-      dataSource: 'nextjs',
-      collection: 'users',
-      filter: {}
-    })
-  });
-
-  const data = await res.json();
-  return { users: data.documents };
-};
-
-export default Home;
+export default Users;

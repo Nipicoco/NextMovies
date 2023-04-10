@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 import styles from '@/styles/Register.module.css';
 import TopbarRegister from '@/components/RegisterTop';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const Register = () => {
+  const router = useRouter();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

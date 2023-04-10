@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from '@/styles/Login.module.css';
+import { useRouter } from 'next/router';
 
 import TopbarLogin from '@/components/LoginTop';
 
 const LoginForm = () => {
-
+  const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -38,8 +39,8 @@ const LoginForm = () => {
           } else if (result.document.password === password) {
             setSuccessMessage(`Logged in successfully with Username: ${username}`);
             setTimeout(() => {
-              //use link to redirect to home page
-              window.location.href = '/movies';
+              // use router to redirect to home page
+              router.push('/movies');
             }, 1500);
           } else {
             setErrorMessage('Incorrect password');

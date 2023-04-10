@@ -51,7 +51,7 @@ const Register = () => {
       //timeout to redirect to movies page after 3 seconds
       setTimeout(() => {
         // use router to redirect to home page
-        router.push('/movies');
+        router.push('/login');
       }, 1500);
     } catch (error) {
       console.log(error);

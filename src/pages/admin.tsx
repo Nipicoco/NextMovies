@@ -38,10 +38,55 @@ const UserList = () => {
     setLoadedUsers(users);
   };
 
+
+  const deleteUsers = async (username: string) => {
+    if (username === "admin") {
+      alert("You cannot delete the admin user");
+      return;
+    }
+
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete ${username}?`
+    );
+    
+    if (confirmDelete) {
+      const url =
+        "https://proxymovies.herokuapp.com/https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/deleteOne";
+      const payload = {
+        collection: "users",
+        database: "movies",
+        dataSource: "nextjs",
+        filter: { username: username },
+      };
+      const headers = {
+        "Content-Type": "application/json",
+        "api-key":
+          "J0cohJmGqJP5pzyqAkk2sXiiUBJcIUUSYqbGubhwPzabRUBtxU4FEARcXmOBCX8U",
+      };
+      const res = await fetch(url, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(payload),
+      });
+      
+      const data = await res.json();
+      alert("User deleted successfully");
+      console.log(data);
+      fetchUsers();
+
+
+    }
+
+
+  };
+
   const handlePasswordClick = async (username: SetStateAction<string>, password: SetStateAction<string>) => {
     const confirmChange = window.confirm(
       `Are you sure you want to change the password for ${username}?`
     );
+
+    
+
     if (confirmChange) {
       const url =
         "https://proxymovies.herokuapp.com/https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/updateOne";
@@ -127,7 +172,14 @@ const UserList = () => {
                     >
                       {user.password}
                     </td>
-
+                      <td>
+                        <button
+                          onClick={() => deleteUsers(user.username)}
+                          className={styles.delete}
+                        >
+                          Delete
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

@@ -17,6 +17,17 @@ const Register = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  useEffect(() => { 
+    //if user is less than 3 characters, set error message
+    if (username.length < 3) {
+      setErrorMessage('Username must be at least 3 characters');
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 2000);
+    }
+  }, [username]);
+
+
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (password && confirmPassword) {
@@ -133,7 +144,7 @@ const Register = () => {
                   setUsername(usernameValue);
                 }
               }}
-              minLength={5}
+              minLength={4}
               value={username}
               className={styles.formInput}
               required

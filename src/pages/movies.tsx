@@ -72,7 +72,7 @@ const Home = () => {
   
   //avoid users from using right click or opening dev tools
 
-
+  
   useEffect(() => {
     const fetchMovies = async () => {
       if (!isSearchClicked) {
@@ -153,6 +153,7 @@ const Home = () => {
                   ? "Close"
                   : "Movie Description"}
               </button>
+             
               {openMovieId === card.id && (
                 <div>
                   <div>

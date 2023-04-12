@@ -3,12 +3,17 @@ import styles from "@/styles/Users.module.css";
 import router from "next/router";
 
 
+type User = {
+  _id: string;
+  username: string;
+  password: string;
+};
 
 const UserList = () => {
-  const [loadedUsers, setLoadedUsers] = useState([]);
+  const [loadedUsers, setLoadedUsers] = useState<User[]>([]);
   const [changePasswordUser, setChangePasswordUser] = useState("");
   const [newPassword, setNewPassword] = useState("");
- 
+
   const fetchUsers = async () => {
     const url =
       "https://proxymovies.herokuapp.com/https://sa-east-1.aws.data.mongodb-api.com/app/data-oprvr/endpoint/data/v1/action/find";
@@ -69,18 +74,20 @@ const UserList = () => {
     }
   };
 
-  const handlePasswordEdit = (event, username, password) => {
-    const key = event.which || event.keyCode;
-    if (key === 13) {
-      const newPassword = event.target.textContent.trim();
+  const handlePasswordEdit = (event: React.KeyboardEvent<HTMLTableCellElement>, username: string, password: string) => {
+    const key = event.key;
+    if (key === "Enter") {
+      const newPassword = event.currentTarget.textContent?.trim();
       if (newPassword && newPassword !== password) {
         handlePasswordClick(username, newPassword);
       } else {
-        event.target.textContent = password;
+        event.currentTarget.textContent = password;
       }
       event.preventDefault();
     }
   };
+  
+  
 
   useEffect(() => {
     fetchUsers();
@@ -112,14 +119,15 @@ const UserList = () => {
                     <tr key={user._id}>
                       <td>{user.username}</td>
                       <td
-                        contentEditable
-                        suppressContentEditableWarning
-                        onKeyPress={(event) =>
-                          handlePasswordEdit(event, user.username, user.password)
-                        }
-                      >
-                        {user.password}
-                      </td>
+                      contentEditable
+                      suppressContentEditableWarning
+                      onKeyDown={(event) =>
+                        handlePasswordEdit(event as React.KeyboardEvent<HTMLTableCellElement>, user.username, user.password)
+                      }
+                    >
+                      {user.password}
+                    </td>
+
                     </tr>
                   ))}
                 </tbody>

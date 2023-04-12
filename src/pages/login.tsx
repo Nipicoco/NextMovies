@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { v4 as uuidv4 } from 'uuid';
 import TopbarLogin from '@/components/LoginTop';
 import RickRollPage from '@/utils/rickroll';
-
+import router from 'next/router';
 const LoginForm = () => {
   
   RickRollPage();
@@ -38,14 +38,15 @@ const LoginForm = () => {
           const result = response.data;
       
           if (result.document === null) {
+
             setErrorMessage('Username not found');
             setTimeout(() => {
               setErrorMessage('');
             }, 2000);
-            
 
             setSuccessMessage('');
           } else if (result.document.password === password) {
+            
             const token = uuidv4();
             localStorage.setItem('token', token);
             localStorage.setItem('username', username);
@@ -78,17 +79,13 @@ const LoginForm = () => {
   //console log the token as soon as the page loads
   useEffect(() => {
     //if token is not present in local storage, redirect to login page
-    if (!localStorage.getItem("token")) {
-      console.log('No token found');
-      
-    }
-    else {
-      console.log('Token found');
-      alert('Already logged in');
-      console.log('Token:', localStorage.getItem("token"));
-      console.log('Username:', localStorage.getItem("username"));
+    if (!localStorage.getItem('token')) {
+      router.push('/login');
+    } else {
+      //if token is present, redirect to movies page
       router.push('/movies');
     }
+
   }, []);
 
 

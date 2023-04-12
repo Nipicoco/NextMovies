@@ -29,41 +29,24 @@ const Home = () => {
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
+    const storedToken = localStorage.getItem('token');
     if (storedUsername) {
       setUsername(storedUsername);
     }
+    console.log('username', username);
+    console.log('token', storedToken);
   }, []);
-
-
-  const isAdmin = username === 'admin';
-  const notAdmin = username !== 'admin';
-
+  
   useEffect(() => {
-    const handleKeyDown = (event: { keyCode: number; }) => {
-      if (isAdmin) { 
-        alert ("Bienvenido admin!");
-        return;
-      }
-      if (notAdmin && event.keyCode === 123) {
-        alert("No puedes abrir la consola!"); 
-        window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-      }
-      
-      
 
-    
-
-    };
 
     const handleContextMenu = (event: { preventDefault: () => void; }) => {
       event.preventDefault();
     };
 
-    document.addEventListener('keydown', handleKeyDown); // Add event listener to document
     document.addEventListener('contextmenu', handleContextMenu); // Add event listener for right-click
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown); // Remove event listener on cleanup
       document.removeEventListener('contextmenu', handleContextMenu); // Remove event listener for right-click on cleanup
     };
   }, []);

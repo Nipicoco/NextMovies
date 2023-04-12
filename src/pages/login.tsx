@@ -39,6 +39,11 @@ const LoginForm = () => {
       
           if (result.document === null) {
             setErrorMessage('Username not found');
+            setTimeout(() => {
+              setErrorMessage('');
+            }, 2000);
+            
+
             setSuccessMessage('');
           } else if (result.document.password === password) {
             const token = uuidv4();
@@ -55,6 +60,11 @@ const LoginForm = () => {
         }, 1500);
           } else {
             setErrorMessage('Incorrect password');
+            setTimeout(() => {
+              setErrorMessage('');
+            }, 2000);
+
+          
             setSuccessMessage('');
           }
         } else {
@@ -99,6 +109,7 @@ const LoginForm = () => {
               Username:
             </label>
             <input
+              minLength={3}
               type="username"
               id="username"
               value={username}
@@ -112,6 +123,7 @@ const LoginForm = () => {
               Password:
             </label>
             <input
+              minLength={3}
               type="password"
               id="password"
               value={password}
